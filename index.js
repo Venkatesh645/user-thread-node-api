@@ -1,6 +1,8 @@
 var express    = require('express');
 var app        = express();
 var bodyParser = require('body-parser');
+require('dotenv').config();
+const jwt = require('./helpers/jwt');
 const usersHandler = require('./handlers/users.handler');
 const sessionsHandler = require('./handlers/sessions.handler');
 
@@ -11,6 +13,7 @@ var port = process.env.PORT || 8080;
 var router = express.Router();
 
 app.use('/api', router);
+app.use(jwt());
 
 router.get('/', (req, res) => {
   res.json({data: "Welcome"});
